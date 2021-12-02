@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovies, getMovies } from "../store/movies";
+import MovieRow from "../components/MovieRow";
 
 
 
@@ -11,7 +12,7 @@ export default function AppMovies() {
 
     useEffect(() => {
         dispatch(getMovies());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
@@ -19,7 +20,7 @@ export default function AppMovies() {
 
             <ul>
                 {movies.data.map((movie) => (
-                    <li key={movie.id}>{movie.title}</li>
+                    <MovieRow key={movie.id} movie={movie} />
                 ))}
             </ul>
         </div>
