@@ -3,8 +3,7 @@ export default function MovieRow({ movie }) {
         <div
             style={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "start",
+                flexDirection: "row"
             }}
         >
             <div>
