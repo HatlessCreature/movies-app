@@ -1,8 +1,13 @@
 import HttpProvider from "./HttpProvider";
 
 class MoviesProvider extends HttpProvider {
-  getMovies = async () => {
-    const { data } = await this.client.get("/movies");
+  getMovies = async (title = "") => {
+    let endpoint = "/movies";
+    if (title) {
+      endpoint += `?title=${title}`;
+    }
+    const { data } = await this.client.get(endpoint);
+
     return data;
   };
 }
