@@ -18,11 +18,11 @@ export default function MovieSearch() {
 
     useEffect(() => {
         search();
-    }, [searchTerm]);
+    }, [searchTerm, dispatch, search]);
 
     return (
         <div>
-            <input type="text" onChange={handleChangeSearchTerm} placeholder="Search movies" />
+            <input type="text" onChange={handleChangeSearchTerm} placeholder="Input search term here" />
         </div>
     );
 }

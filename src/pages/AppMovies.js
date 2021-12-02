@@ -16,13 +16,17 @@ export default function AppMovies() {
 
     return (
         <div>
-            <h1>App movies</h1>
+            <h1>Movies</h1>
 
-            <ul>
-                {movies.data.map((movie) => (
-                    <MovieRow key={movie.id} movie={movie} />
-                ))}
-            </ul>
+            {movies.data.length ? (
+                <ul>
+                    {movies.data.map((movie) => (
+                        <MovieRow key={movie.id} movie={movie} />
+                    ))}
+                </ul>
+            ) : (
+                <div>There are no movies that meet the search term.</div>
+            )}
         </div>
     );
 }
