@@ -12,6 +12,7 @@ export default function AppMovies() {
 
     const [sortCriteria, setSortCriteria] = useState("id");
     const [sortDirection, setSortDirection] = useState(1);
+    const [selectedMovies, setSelectedMovies] = useState([]);
 
     const sortedMovies = [...movies.data].sort((m1, m2) => {
         if (m1[sortCriteria] < m2[sortCriteria]) {
@@ -37,6 +38,15 @@ export default function AppMovies() {
         dispatch(getMovies());
     }, [dispatch]);
 
+    function handleSelectMovie(id) {
+        // const index = sortedMovies.findIndex(mov => mov.id === id);
+        if (selectedMovies.find(el => el === id)) {
+            alert("Already selected");
+            return;
+        }
+        setSelectedMovies([...selectedMovies, id])
+    }
+
     return (
         <div>
             <h1>Movies</h1>
@@ -47,9 +57,14 @@ export default function AppMovies() {
                         <button onClick={() => sortBy("title")}>Title</button>
                         <button onClick={() => sortBy("duration")}>Duration</button>
                     </div>
+                    {selectedMovies.length ? (
+                        <div>Selected {selectedMovies.length}</div>
+                    ) : (
+                        <div>None selected</div>
+                    )}
                     <ul>
                         {sortedMovies.map((movie) => (
-                            <MovieRow key={movie.id} movie={movie} />
+                            <MovieRow key={movie.id} movie={movie} handleSelectMovie={handleSelectMovie} />
                         ))}
                     </ul>
                 </div>

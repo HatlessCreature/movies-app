@@ -1,9 +1,11 @@
-export default function MovieRow({ movie }) {
+export default function MovieRow({ movie, handleSelectMovie }) {
     return (
         <div
             style={{
                 display: "flex",
-                flexDirection: "row"
+                flexDirection: "row",
+                padding: 5,
+                margin: 5
             }}
         >
             <div>
@@ -14,6 +16,7 @@ export default function MovieRow({ movie }) {
             <div>{movie.duration}</div>
             <div>{movie.release_date}</div>
             <div>{movie.genre}</div>
+            <button onClick={() => handleSelectMovie(movie.id)}>Select</button>
 
         </div>
     );
