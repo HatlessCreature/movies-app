@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovies, getMovies } from "../store/movies";
+import { Link } from "react-router-dom";
 import MovieRow from "../components/MovieRow";
 
 
@@ -59,6 +60,10 @@ export default function AppMovies() {
         setSelectedMovies([]);
     }
 
+    function handlePaginate(page) {
+        dispatch(getMovies(page));
+    }
+
     return (
         <div>
             <h1>Movies</h1>
@@ -86,6 +91,17 @@ export default function AppMovies() {
                                 isSelected={selectedMovies.find(el => el === movie.id)} />
                         ))}
                     </ul>
+                    {movies.current_page > 1 ? (
+                        <button onClick={() => handlePaginate(movies.current_page - 1)}>Previous Page</button>
+                    ) : (
+                        <></>
+                    )}
+                    {movies.current_page === movies.last_page ? (
+                        <></>
+                    ) : (
+                        <button onClick={() => handlePaginate(movies.current_page + 1)}>Next Page</button>
+                    )}
+
                 </div>
             ) : (
                 <div>There are no movies that meet the search term.</div>
