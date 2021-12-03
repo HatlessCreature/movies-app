@@ -47,6 +47,18 @@ export default function AppMovies() {
         setSelectedMovies([...selectedMovies, id])
     }
 
+    function handleSelectAllMovies() {
+        let outputMovies = [];
+        for (const movie of sortedMovies) {
+            outputMovies = [...outputMovies, movie.id];
+        }
+        setSelectedMovies(outputMovies);
+    }
+
+    function handleDeselectAllMovies() {
+        setSelectedMovies([]);
+    }
+
     return (
         <div>
             <h1>Movies</h1>
@@ -62,9 +74,16 @@ export default function AppMovies() {
                     ) : (
                         <div>None selected</div>
                     )}
+                    <div>
+                        <button onClick={handleSelectAllMovies}>Select All</button>
+                        <button onClick={handleDeselectAllMovies}>Deselect All</button>
+                    </div>
                     <ul>
                         {sortedMovies.map((movie) => (
-                            <MovieRow key={movie.id} movie={movie} handleSelectMovie={handleSelectMovie} />
+                            <MovieRow key={movie.id}
+                                movie={movie}
+                                handleSelectMovie={handleSelectMovie}
+                                isSelected={selectedMovies.find(el => el === movie.id)} />
                         ))}
                     </ul>
                 </div>

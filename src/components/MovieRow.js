@@ -1,4 +1,4 @@
-export default function MovieRow({ movie, handleSelectMovie }) {
+export default function MovieRow({ movie, handleSelectMovie, isSelected }) {
     return (
         <div
             style={{
@@ -17,6 +17,11 @@ export default function MovieRow({ movie, handleSelectMovie }) {
             <div>{movie.release_date}</div>
             <div>{movie.genre}</div>
             <button onClick={() => handleSelectMovie(movie.id)}>Select</button>
+            {isSelected ? (
+                <div>Selected</div>
+            ) : (
+                <></>
+            )}
 
         </div>
     );
